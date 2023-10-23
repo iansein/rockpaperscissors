@@ -1,0 +1,70 @@
+body {
+  background-color: black;
+}
+
+.options-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+
+.center {
+  text-align: center;
+  color: white;
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result {
+  font-weight: 800;
+  font-size: 32px;
+}
+
+.result-explanation {
+  font-weight: 800;
+  font-size: 32px;
+  color: white;
+}
+
+.user-score,
+.computer-score,
+.end-game {
+  font-weight: 800;
+  font-size: 36px;
+  color: white;
+}
+
+.end-game {
+  color: purple;
+}
+
+.user-computer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+
+.button-retry {
+  color: purple;
+  border: 2px solid purple;
+  font-weight: bolder;
+  padding: 26px;
+  width: 200px;
+  font-size: 32px;
+  text-align: center;
+  display: none;
+}
+
+.end-game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}

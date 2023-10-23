@@ -1,76 +1,121 @@
+let buttonRock = document.querySelector(".rock");
+let buttonPaper = document.querySelector(".paper");
+let buttonScissors = document.querySelector(".scissors");
+let userScore = document.querySelector(".user-score");
+let computerScore = document.querySelector(".computer-score");
+let endGame = document.querySelector(".end-game");
+let buttonRetry = document.querySelector(".button-retry");
+let countUserScore = 0;
+let countScoreComputer = 0;
+let result = document.querySelector(".result");
+let resultExplanation = document.querySelector(".result-explanation");
+
+buttonRetry.addEventListener("click", () => {
+  buttonRock.disabled = false;
+  buttonPaper.disabled = false;
+  buttonScissors.disabled = false;
+  buttonRetry.style.display = "none";
+  countUserScore = 0;
+  countScoreComputer = 0;
+  userScore.textContent = `Your Score: ${countUserScore.toString()}`;
+  computerScore.textContent = `Computer Score: ${countScoreComputer.toString()}`;
+  endGame.textContent = "";
+  result.textContent = "";
+  resultExplanation.textContent = "";
+});
+buttonRock.addEventListener("click", () => {
+  let score = playRound("rock", getComputerChoice());
+  if (score === "win") {
+    countUserScore++;
+    userScore.textContent = `Your Score: ${countUserScore.toString()}`;
+  } else if (!score) {
+    countScoreComputer++;
+    computerScore.textContent = `Computer Score: ${countScoreComputer.toString()}`;
+  }
+  if (countUserScore === 5 || countScoreComputer === 5) {
+    endGame.textContent = "GAME FINISHED";
+    buttonRock.disabled = true;
+    buttonPaper.disabled = true;
+    buttonScissors.disabled = true;
+    buttonRetry.style.display = "block";
+  }
+});
+
+buttonPaper.addEventListener("click", () => {
+  let score = playRound("paper", getComputerChoice());
+  if (score === "win") {
+    countUserScore++;
+    userScore.textContent = `Your Score: ${countUserScore.toString()}`;
+  } else if (!score) {
+    countScoreComputer++;
+    computerScore.textContent = `Computer Score: ${countScoreComputer.toString()}`;
+  }
+  if (countUserScore === 5 || countScoreComputer === 5) {
+    endGame.textContent = "GAME FINISHED";
+    buttonRock.disabled = true;
+    buttonPaper.disabled = true;
+    buttonScissors.disabled = true;
+    buttonRetry.style.display = "block";
+  }
+});
+
+buttonScissors.addEventListener("click", () => {
+  let score = playRound("scissors", getComputerChoice());
+  if (score === "win") {
+    countUserScore++;
+    userScore.textContent = `Your Score: ${countUserScore.toString()}`;
+  } else if (!score) {
+    countScoreComputer++;
+    computerScore.textContent = `Computer Score: ${countScoreComputer.toString()}`;
+  }
+  if (countUserScore === 5 || countScoreComputer === 5) {
+    endGame.textContent = "GAME FINISHED";
+    buttonRock.disabled = true;
+    buttonPaper.disabled = true;
+    buttonScissors.disabled = true;
+    buttonRetry.style.display = "block";
+  }
+});
 
 // Get a random computer choice from 3 options (Paper, Rock or Scissors)
-
-function getComputerChoice(){
-    let paper = `paper`;
-    let rock = `rock`;
-    let scissors = `scissors`;
-    let arrayForOptions = [];
-    arrayForOptions.push(paper, rock, scissors);
-    return arrayForOptions[Math.floor(Math.random() * arrayForOptions.length)];
+function getComputerChoice() {
+  let paper = `paper`;
+  let rock = `rock`;
+  let scissors = `scissors`;
+  let arrayForOptions = [];
+  arrayForOptions.push(paper, rock, scissors);
+  return arrayForOptions[Math.floor(Math.random() * arrayForOptions.length)];
 }
 
 // Play one round of the game returning a message of victory, defeat or draw.
 
-function playRound(playerSelection, computerSelection){
-    if(!(playerSelection) || (playerSelection !== `paper` && playerSelection !== `rock` && playerSelection !== `scissors`)){
-        return `ERROR: Write a right choice, 'Rock, Paper or Scissors'`
-    }
-    else{
-        let defeatMessage = `You Lose, ${computerSelection} beats ${playerSelection}`;;
-        let victoryMessage = `You Won, ${playerSelection} beats ${computerSelection}`;
-        let drawMessage = `You draw, ${playerSelection} draws ${computerSelection}`;
-    
-        if(playerSelection === `paper` && computerSelection === `rock` || playerSelection === `rock` && computerSelection === `scissors` ||
-            playerSelection === `scissors` && computerSelection === `paper`){
-            console.log(victoryMessage);
-            return "win";
-        }
-        else if(playerSelection === computerSelection){
-            
-            console.log(drawMessage);
-            return "draw";
-        }
-        else{
-            console.log(defeatMessage);
-            return "defeat";
-        }
-    }
+function playRound(playerSelection, computerSelection) {
+  console.log(playerSelection);
+  console.log(computerSelection);
+  if (
+    (playerSelection === `paper` && computerSelection === `rock`) ||
+    (playerSelection === `rock` && computerSelection === `scissors`) ||
+    (playerSelection === `scissors` && computerSelection === `paper`)
+  ) {
+    result.textContent = "YOU WON";
+    result.style.color = "green";
+    resultExplanation.textContent = `${
+      playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
+    } beats ${computerSelection}`;
+    return "win";
+  } else if (playerSelection === computerSelection) {
+    result.textContent = "YOU DRAW";
+    result.style.color = "yellow";
+    resultExplanation.textContent = `${
+      playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
+    } draws ${computerSelection}`;
+    return "draw";
+  } else {
+    result.textContent = "YOU LOSE";
+    result.style.color = "red";
+    resultExplanation.textContent = `${
+      playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
+    } loses ${computerSelection}`;
+    return false;
+  }
 }
-
-// Play 5 rounds and shows the currently score of both after one game and the final score at the end. 
-
-function playGame(){   
-    let playerScore = 0;
-    let computerScore = 0;
-    let playerSelection;
-    let computerSelection;
-
-   for(let i = 0; i<5; i++){
-    playerSelection = prompt("Enter your choice... (Paper, Rock or Scissors)").toLowerCase();
-    computerSelection = getComputerChoice();
-    let result = playRound(playerSelection, computerSelection);
-
-     if(result === `win`){
-        playerScore++;
-     }
-     else if(result === `defeat`){
-        computerScore++;
-     }
-     console.log(`Your score: ${playerScore}
-     Computer score: ${computerScore}`);
-   }
-
-   if(playerScore > computerScore){
-    return `You Won`;
-   }
-   else if(playerScore < computerScore){
-    return `You Lose`;
-   }
-   else{
-    return `You Draw`;
-   }
-}
-
-
-console.log(playGame());

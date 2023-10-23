@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="./styles.css">
-    <script src="./functions.js"></script>
 </head>
+
 <body>
-    
+    <h1 class="center">Pick your option:</h1>
+    <div class="options-container">
+        <button class="rock"><img src="./assets/rock.png" alt="rock" width="100"></button>
+        <button class="paper"><img src="./assets/paper.png" alt="paper" width="100"></button>
+        <button class="scissors"><img src="./assets/scissors.png" alt="scissors" width="100"></button>
+    </div>
+    <div class="score-container">
+        <p class="result"></p>
+        <p class="result-explanation"></p>
+        <div class="user-computer-container">
+            <p class="user-score">Your Score: 0</p>
+            <p class="computer-score">Computer Score: 0</p>
+        </div>
+        <div class="end-game-container">
+            <h2 class="end-game"></h2>
+            <button class="button-retry">RETRY</button>
+        </div>
+    </div>
+    <script src="./functions.js"></script>
 </body>
+
 </html>
